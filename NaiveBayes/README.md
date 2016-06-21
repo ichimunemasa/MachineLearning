@@ -1,58 +1,45 @@
 # ナイーブベイズ分類器
-## 分類とは
-* 例えば「電子メール」
-  + 仕事関係
-  + プライベート
-  + スパムメール  
-* 例えば「品詞タグ付け」
-  + 名詞
-  + 動詞
-  + 形容詞
-* などのグループに分けたいと考えることがある
-* あらかじめ決まったグループに分けることを***分類***と呼ぶ
-
-## 分類器の作り方
-* 人間が分類規則を書く
-  + 例)品詞のタグ付けの場合
-    + 「い」で終わる→**形容詞**    
-* データから自動的に分類器を構築する方法
-  + $D = \{(d^{(1)},c^{(1)}),(d^{(2)},c^{(2)}),...,(d^{(|D|)},c^{(|D|)})\}$
-  + が与えられる必要がある
-  + $d$はそれぞれの事例
-  + $c$はそれぞれの事例が属するクラス
-* このように、あらかじめ正解を与えておく→教師あり
+## 今回考える問題
+![task](img/task.png)
 
 ## ナイーブベイズ分類器
-* 特徴
-  + 非常に早い
-  + 古典的な分類器
-  + 最新のものと比較すると劣る
-  + 適切な使い方をすれば高性能である
-* ベイズの定理の考え方に基づく分類器である
+![naivebayes01](img/naivebayes01.png)
 
-```math
-  P(c|d) = \frac{P(c)P(d|c)}{P(d)}
-```
-
-* この式の右辺が最大となるクラス$C$を出力することになる
-* $c$をクラス、$d$を文書と考えた場合
-  + あたえられた文書$d$がどのクラス$c$に所属する確率が最も高いかを求めることになる
-* 右辺における$P(d|c)$を計算するのはとても難しい
-* ナイーブベイズ分類器ではモデルを仮定して$P(d|c)$を求める
-  + **多変数ベルヌーイモデル**
-  + **多項モデル**
-
-## 今回考える問題
-* プラス思考のP氏
-  +  $d^{(1)} = "good \ \ bad\ \  good\ \  good"$
-  +  $d^{(2)} = "exciting\ \ exciting"$
-  +  $d^{(3)} = "good\ \ good\ \ exciting\ \ boring"$
-* マイナス思考のN氏
-  +  $d^{(4)} = "bad\ \ boring\ \ boring\ \ boring"$
-  +  $d^{(5)} = "bad\ \ good\ \ bad"$
-  +  $d^{(6)} = "bad\ \ bad\ \ boring\ \ exciting"$
-* それぞれ3つずつ文書を作成した。新しい文書 $"bad\ \ boring\ \ exciting\ \ good"$ が与えられた時、この文書はP氏のものかN氏のものか判定する。
+![naiveBayes02](img/naiveBayes02.png)
 
 ## 多変数ベルヌーイモデル
+### 多変数ベルヌーイモデルの適用
+
+![bernoulliExpression](img/bernoulliExpression.png)
+
+![bernoulliValue](img/bernoulliValue.png)
+
+### 多変数ベルヌーイモデル***学習フェーズ***
+![bernoulliTrain](img/bernoulliTrain.png)
+
+### 多変数ベルヌーイモデル***分類フェーズ***
+![bernoulliClassify](img/bernoulliClassify.png)
+
+### 実装ナイーブベイズ***学習フェーズ***
+![bernoulliImp01](img/bernoulliImp01.png)
+
+### 実装ナイーブベイズ***分類フェーズ***
+![bernoulliImp02](img/bernoulliImp02.png)
 
 ## 多項モデル
+### 多項モデルの適用
+![multinominalExpression](img/multinominalExpression.png)
+
+![bernoulliValue](img/bernoulliValue.png)
+
+### 多項モデル***学習フェーズ***
+![multinominalTrain](img/multinominalTrain.png)
+
+### 多項モデル***分類フェーズ***
+![multinominalClassify](img/multinominalClassify.png)
+
+### 実装ナイーブベイズ***学習フェーズ***
+![multinominalImp01](img/multinominalImp01.png)
+
+### 実装ナイーブベイズ***分類フェーズ***
+![multinominalImp02](img/multinominalImp02.png)
